@@ -1,0 +1,252 @@
+body {
+    background-color: #666;
+    color: #fff;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 1em;
+    text-shadow: 0 0 5px #000;
+}
+
+h1 {
+    font-size: 2rem;
+    margin: 0 0 .5rem 0;
+    float: left;
+}
+
+input,
+select,
+button {
+    font-size: 1em;
+}
+button {
+    cursor: pointer;
+}
+
+
+.appsettings {
+    float: right;
+    margin-top: .8rem;
+    margin-bottom: 1rem;
+}
+.appsettings__zoom,
+.appsettings__altstyle {
+    display: inline-block;
+    margin-left: 1rem;
+    margin-bottom: .5rem;
+}
+
+.appsettings__zoom,
+.appsettings__altstyle {
+    display: inline-block;
+    margin-left: 1.5rem;
+    margin-bottom: .5rem;
+}
+
+
+
+
+.savedlabelsmenu {
+    clear: both;
+    margin-bottom: 1rem;
+}
+.savedlabelsmenu__labellist,
+.savedlabelsmenu__newlabel {
+    display: inline-block;
+    margin-right: 1.5rem;
+    margin-bottom: .5rem;
+}
+
+.savedlabelsmenu__newlabel {
+    border: 0;
+    background: 0;
+    line-height: inherit;
+    color: inherit;
+    padding: 0;
+
+    margin-right: 0;
+    color: #ddd;
+    border-bottom: 1px dotted #bbb;
+}
+.savedlabelsmenu__newlabel:hover,
+.savedlabelsmenu__newlabel:focus {
+    color: #fff;
+    border-bottom-style: solid;
+}
+
+
+
+.labelsettings {
+    clear: both;
+    border-top: 1px solid #ccc;
+    padding-top: 1rem;
+}
+.labelsettings__width,
+.labelsettings__vertical,
+.labelsettings__textsize,
+.labelsettings__duolang {
+    display: inline-block;
+    margin-right: 1.5rem;
+    margin-bottom: .5rem;
+}
+
+.labelsettings__width > input {
+    width: 3.3em;
+}
+
+
+
+.labelactions {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.labelactions__save,
+.labelactions__delete {
+    display: inline-block;
+    margin-right: 1.5rem;
+    margin-bottom: .5rem;
+}
+.labelactions__save {
+    font-size: 1rem;
+}
+.labelactions__delete {
+    border: 0;
+    background: 0;
+    line-height: inherit;
+    color: inherit;
+    padding: 0;
+
+    margin-right: 0;
+    margin-left: auto;
+    color: #ddd;
+    border-bottom: 1px dotted #bbb;
+}
+.labelactions__delete:hover,
+.labelactions__delete:focus {
+    color: #fff;
+    border-bottom-style: solid;
+}
+
+
+
+
+@media print {
+    body {
+        background-color: transparent;
+    }
+    h1,
+    .appsettings,
+    .savedlabelsmenu,
+    .labelsettings,
+    .labelactions {
+        display: none;
+    }
+}
+
+
+
+.activelabel {
+    border: 0.1pt dotted #000;
+    box-sizing: border-box;
+    color: #000;
+    text-shadow: none;
+    font-family: 'athelas', 'Droid Serif', sherif;
+}
+.activelabel__inner {
+    display: flex;
+}
+.activelabel--layout--vertical > .activelabel__inner {
+    flex-direction: column;
+}
+.activelabel--textsize--large  { font-size: 20pt; }
+.activelabel--textsize--normal { font-size: 17pt;}
+.activelabel--textsize--small  { font-size: 14pt; }
+
+@media screen {
+    .activelabel {
+        transform-origin: 0 0;
+    }
+    .activelabel--zoom--90 { transform: scale(.90); }
+    .activelabel--zoom--80 { transform: scale(.80); }
+    .activelabel--zoom--70 { transform: scale(.70); }
+    .activelabel--zoom--60 { transform: scale(.60); }
+    .activelabel--zoom--50 { transform: scale(.50); }
+    .activelabel--zoom--40 { transform: scale(.40); }
+    .activelabel--zoom--33 { transform: scale(.33); }
+    .activelabel--zoom--25 { transform: scale(.25); }
+    .activelabel--zoom--20 { transform: scale(.20); }
+    .activelabel--zoom--15 { transform: scale(.15); }
+}
+
+
+
+.activelabel__section {
+    flex-grow: 1;
+    width: 50%;
+}
+.activelabel--layout--vertical .activelabel__section {
+    width: auto;
+}
+
+.activelabel__section__title {
+    font-size: (22/16)em;
+    margin: 0;
+    margin-bottom: (4/22)em;
+    line-height: 1.2em;
+}
+.activelabel__section__text  {
+    line-height: (20/17)em;
+}
+.activelabel__section__text > p {
+    margin: 0;
+    margin-bottom: (10/17)em;
+}
+.activelabel__section__text > p:last-child {
+    margin-bottom: 0;
+}
+
+
+
+.activelabel--style--normal {
+    padding: 1cm 1cm 1.25cm 1cm;
+    background-color: #eee;
+}
+.activelabel--style--normal .activelabel__inner {
+    border: .5pt solid #000;
+}
+.activelabel--style--normal .activelabel__section {
+    padding: 1cm  calc(1cm + 2pt);
+    background-color: #fff;
+}
+.activelabel--style--normal.activelabel--layout--horizontal .activelabel__section--is {
+    padding-right: .8cm;
+}
+.activelabel--style--normal.activelabel--layout--horizontal .activelabel__section--en {
+    padding-left: .8cm;
+}
+.activelabel--style--normal.activelabel--layout--vertical .activelabel__section--is {
+    padding-bottom: .6cm;
+}
+.activelabel--style--normal.activelabel--layout--vertical .activelabel__section--en {
+    padding-top: .6cm;
+}
+
+
+.activelabel--style--alternate {
+}
+.activelabel--style--alternate .activelabel__section {
+    padding: 1.5cm;
+    background-color: #fff;
+}
+.activelabel--style--alternate .activelabel__section--en {
+    padding: 1.5cm;
+    background-color: #eef;
+}
+
+
+
+
