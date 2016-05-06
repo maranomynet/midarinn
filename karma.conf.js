@@ -20,8 +20,12 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'pub/**/*.js',
+      // Globals/Preloads
+
+      // Specs
       'src/**/*.spec.js',
+      // Watched
+      { pattern: 'pub/**/*.js', watched: true, served: false, included: false },
     ],
 
 
@@ -39,7 +43,7 @@ module.exports = function(config) {
     // preprocessor Config:
     rollupPreprocessor: {
       rollup: rollupCfg,
-      // bundle: { sourceMap: 'inline' },
+      bundle: rollupCfg,
     },
 
 
