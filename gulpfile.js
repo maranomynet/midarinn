@@ -35,7 +35,7 @@ gulp.task('css', function() {
           // ...or when monitoring named animations via JavaScript
           safe: true,
         }) )
-      .pipe( sourcemaps.write( '.maps/' ) )
+      .pipe( sourcemaps.write( '_maps/' ) )
       .pipe( gulp.dest( 'pub/' ) );
 });
 
@@ -59,7 +59,7 @@ gulp.task('js', function () {
           drop_console: true,
         },
       }) )
-    .pipe( sourcemaps.write( '.maps/' ) )
+    .pipe( sourcemaps.write( '_maps/' ) )
     .pipe( gulp.dest( 'pub/' ) );
 
   return s;
