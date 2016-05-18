@@ -199,6 +199,7 @@ var _renderActiveLabel = function (c) {
 
     return  (c.same.activelabel && c.same.settings) ||
             m('div', { className: 'activelabel ' + zoomClass + styleClass + layoutClass + textsizeClass,
+                id: 'activelabel',
                 style: 'width:'+ state.activelabel.width +'cm',
               },
               c.same.activelabel ||
@@ -212,6 +213,17 @@ var _renderActiveLabel = function (c) {
                   _renderEditableElm('h2', 'title', 'en_title'),
                   _renderEditableElm('div', 'text', 'en_text')
                 )
+              ),
+              m('div', { className: 'activelabel__height' },
+                'Hæð: ',
+                m('span', {
+                  config: function (heightElm/*, isRedraw, ctx*/) {
+                      var activeLabelElm = document.getElementById('activelabel');
+                      var height = state.activelabel.width * activeLabelElm.offsetHeight / activeLabelElm.offsetWidth;
+                      heightElm.innerHTML = (height+'').replace(/\.(\d)\d*$/, ',$1');
+                    },
+                }),
+                'cm'
               )
             );
   };

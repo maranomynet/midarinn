@@ -159,6 +159,7 @@ button {
 
 
 .activelabel {
+    position: relative;
     border: 0.1pt dotted #000;
     box-sizing: border-box;
     color: #000;
@@ -175,23 +176,40 @@ button {
 .activelabel--textsize--normal { font-size: 17pt;}
 .activelabel--textsize--small  { font-size: 14pt; }
 
+$zoomlevels = (90 80 70 60 50 40 33 25 20 15);
+
 @media screen {
     .activelabel {
         transform-origin: 0 0;
     }
-    .activelabel--zoom--90 { transform: scale(.90); }
-    .activelabel--zoom--80 { transform: scale(.80); }
-    .activelabel--zoom--70 { transform: scale(.70); }
-    .activelabel--zoom--60 { transform: scale(.60); }
-    .activelabel--zoom--50 { transform: scale(.50); }
-    .activelabel--zoom--40 { transform: scale(.40); }
-    .activelabel--zoom--33 { transform: scale(.33); }
-    .activelabel--zoom--25 { transform: scale(.25); }
-    .activelabel--zoom--20 { transform: scale(.20); }
-    .activelabel--zoom--15 { transform: scale(.15); }
+    for $zoom in $zoomlevels {
+        .activelabel--zoom--{$zoom} { transform: scale($zoom/100); }
+    }
 }
 
 
+.activelabel__height {
+    @media screen {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        margin: .2cm .3cm;
+        // bottom: 0;
+        // left: 100%;
+        // transform-origin: 0 100%;
+        // transform: rotate(-90deg);
+        // margin: .2cm  -.1cm;
+        font-size: 20px;
+        transform-origin: 0 0
+
+        for $zoom in $zoomlevels {
+            .activelabel--zoom--{$zoom} & { transform: scale(100/$zoom); }
+        }
+    }
+    @media print {
+        display: none;
+    }
+}
 
 .activelabel__section {
     flex-grow: 1;
@@ -255,6 +273,7 @@ button {
     padding: 1.5cm;
     background-color: #eef;
 }
+
 
 
 
