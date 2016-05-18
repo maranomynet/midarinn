@@ -5,8 +5,6 @@ import * as action from './actions';
 import { textsizes, zoomlevels } from './options';
 
 
-var labelMaker = {};
-
 var _renderAppSettings = function (c) {
     return  c.same.settings ||
             m('div', { className: 'appsettings' },
@@ -219,38 +217,41 @@ var _renderActiveLabel = function (c) {
   };
 
 
-labelMaker.controller = function () {
-    var c = {};
+var labelMaker = {
+      controller: function () {
+          var c = {};
 
-    var unchanged = { subtree:'retain' };
-    var last = {};
-    c.same = {},
-    c.checkStateChange = function () {
-        c.same.activelabel = state.activelabel === last.activelabel  &&  unchanged;
-        c.same.labels = state.labels === last.labels  &&  unchanged;
-        c.same.settings = state.settings === last.settings  &&  unchanged;
+          var unchanged = { subtree:'retain' };
+          var last = {};
+          c.same = {},
+          c.checkStateChange = function () {
+              c.same.activelabel = state.activelabel === last.activelabel  &&  unchanged;
+              c.same.labels = state.labels === last.labels  &&  unchanged;
+              c.same.settings = state.settings === last.settings  &&  unchanged;
 
-        last.activelabel = state.activelabel;
-        last.labels = state.labels;
-        last.settings = state.settings;
-        return c.same;
-      };
+              last.activelabel = state.activelabel;
+              last.labels = state.labels;
+              last.settings = state.settings;
+              return c.same;
+            };
 
-    return c;
-  };
+          return c;
+        },
 
-labelMaker.view = function (c) {
-    c.checkStateChange();
+      view: function (c) {
+          c.checkStateChange();
 
-    return [
-        m('h1', 'Síldarmiðavélin'),
-        _renderAppSettings(c),
-        _renderSavedLabelsMenu(c),
-        _renderLabelSettings(c),
-        _renderLabelActions(c),
-        _renderActiveLabel(c)
-      ];
-  };
+          return [
+              m('h1', 'Síldarmiðavélin'),
+              _renderAppSettings(c),
+              _renderSavedLabelsMenu(c),
+              _renderLabelSettings(c),
+              _renderLabelActions(c),
+              _renderActiveLabel(c)
+            ];
+        },
+    };
+
 
 
 export default labelMaker;
