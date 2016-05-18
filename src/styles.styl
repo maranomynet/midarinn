@@ -29,16 +29,10 @@ button {
     margin-bottom: 1rem;
 }
 .appsettings__zoom,
+.appsettings__colorchart,
 .appsettings__altstyle {
     display: inline-block;
     margin-left: 1rem;
-    margin-bottom: .5rem;
-}
-
-.appsettings__zoom,
-.appsettings__altstyle {
-    display: inline-block;
-    margin-left: 1.5rem;
     margin-bottom: .5rem;
 }
 
@@ -158,6 +152,7 @@ button {
 
 
 
+
 .activelabel {
     position: relative;
     border: 0.1pt dotted #000;
@@ -271,10 +266,34 @@ $zoomlevels = (90 80 70 60 50 40 33 25 20 15);
 }
 .activelabel--style--alternate .activelabel__section--en {
     padding: 1.5cm;
-    background-color: #eef;
+    background-color: #dfe0e2;
 }
 
 
 
 
+.colorchart {
+    width: 25cm;
+    height: 10cm;
+    background-color: #fff;
+    display: flex;
+}
+.colorchart__bar {
+    text-align: center;
+    line-height: 10cm;
+    text-shadow: none;
+    color: #000;
+    margin: 2.5mm;
+    font-weight: 400;
+    flex-grow: 1;
+    flex-basis: 100px;
+}
+$color = #dfe0e2;
+.colorchart__bar--1 { background-color: lighten($color, 50%); }
+.colorchart__bar--2 { background-color: lighten($color, 35%); }
+.colorchart__bar--3 { background-color: lighten($color, 20%); }
+.colorchart__bar--4 { background-color: #e0e0e0; }
+.colorchart__bar--5 { background-color: $color; }
+.colorchart__bar--6 { background-color: darken($color, 4%); }
+.colorchart__bar--7 { background-color: darken($color, 8%); }
 

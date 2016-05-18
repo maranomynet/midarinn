@@ -8,6 +8,7 @@ import { textsizes, zoomlevels } from './options';
 var _renderAppSettings = function (c) {
     return  c.same.settings ||
             m('div', { className: 'appsettings' },
+              c.showColorChart?null:
               m('div', { className: 'appsettings__zoom' },
                 m('label', { htmlFor:'appsettings__zoom' }, 'Zoom:'),
                 ' ',
@@ -25,6 +26,7 @@ var _renderAppSettings = function (c) {
                   })
                 )
               ),
+              c.showColorChart?null:
               m('div', { className: 'appsettings__altstyle' },
                 m('input', { type:'checkbox',
                   id: 'appsettings__altstyle',
@@ -33,11 +35,20 @@ var _renderAppSettings = function (c) {
                 }),
                 ' ',
                 m('label', { htmlFor:'appsettings__altstyle' }, 'Hinn stíllinn')
+              ),
+              m('div', { className: 'appsettings__colorchart' },
+                m('input', { type:'checkbox',
+                  id: 'appsettings__colorchart',
+                  checked: c.showColorChart,
+                  onclick: function () { c.showColorChart = this.checked; },
+                }),
+                ' ',
+                m('label', { htmlFor:'appsettings__colorchart' }, 'Litaspjald')
               )
             );
   };
 
-var _renderSavedLabelsMenu = function (/*c*/) {
+var _renderSavedLabelsMenu = function (c) {
     return  m('div', { className: 'savedlabelsmenu' },
               !state.labels.length ? null:
               m('div', { className: 'savedlabelsmenu__labellist' },
@@ -241,7 +252,8 @@ var labelMaker = {
               c.same.labels = state.labels === last.labels  &&  unchanged;
               c.same.settings = state.settings === last.settings  &&  unchanged;
 
-              last.activelabel = state.activelabel;
+              // last.activelabel = state.activelabel;
+              last.activelabel = !c.showColorChart && state.activelabel;
               last.labels = state.labels;
               last.settings = state.settings;
               return c.same;
@@ -256,10 +268,16 @@ var labelMaker = {
           return [
               m('h1', 'Síldarmiðavélin'),
               _renderAppSettings(c),
-              _renderSavedLabelsMenu(c),
-              _renderLabelSettings(c),
-              _renderLabelActions(c),
-              _renderActiveLabel(c)
+              c.showColorChart?null:
+                _renderSavedLabelsMenu(c),
+              c.showColorChart?null:
+                _renderLabelSettings(c),
+              c.showColorChart?null:
+                _renderLabelActions(c),
+              c.showColorChart?null:
+                _renderActiveLabel(c),
+              !c.showColorChart?null:
+                m('div.colorchart', { key:'foo' }, [1,2,3,4,5,6,7].map(function(i){ return m('div.colorchart__bar.colorchart__bar--'+i,i); }) )
             ];
         },
     };
