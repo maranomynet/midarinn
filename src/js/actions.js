@@ -3,7 +3,7 @@ import { state, getEmptyLabel } from './state';
 var _localStorage = window.localStorage;
 
 window.addEventListener('unload', function () {
-  _localStorage.setItem('sild-midi', JSON.stringify(state.activelabel));
+  _localStorage['sild-midi'] = JSON.stringify(state.activelabel);
 });
 
 var _updateState = function ( fieldName, prop, newValue ) {
@@ -95,7 +95,7 @@ var saveActiveLabel = function () {
       state.labels.unshift(activelabel);
     }
     if ( _localStorage ) {
-      _localStorage.setItem('sild-midar', JSON.stringify(state.labels));
+      _localStorage['sild-midar'] = JSON.stringify(state.labels);
     }
   }
 };

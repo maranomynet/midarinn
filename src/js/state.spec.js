@@ -25,8 +25,8 @@ describe('getEmptyLabel', function () {
 describe('state object', function () {
 
   // afterAll(function () {
-  //   localStorage.removeItem('sild-midi');
-  //   localStorage.removeItem('sild-midar');
+  //   delete localStorage['sild-midi'];
+  //   delete localStorage['sild-midar'];
   // });
 
   it('comes initialized', function () {
@@ -38,7 +38,7 @@ describe('state object', function () {
   var localStorage = window.localStorage;
   if ( localStorage ) {
     it('shouldn\'t have localStorage copy saved', function () {
-      expect( localStorage.getItem('sild-midi') ).toBeNull();
+      expect( localStorage['sild-midi'] ).toBeUndefined();
     });
   }
 
