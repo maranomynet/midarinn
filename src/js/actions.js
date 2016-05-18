@@ -72,6 +72,7 @@ var deleteActiveLabel = function () {
     if ( idx != null ) {
       state.labels = state.labels.slice();
       state.labels.splice( idx, 1 );
+      _localStorage['sild-midar'] = JSON.stringify(state.labels);
       makeNewLabel();
       // success = true;
     }
