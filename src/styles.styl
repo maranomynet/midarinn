@@ -91,6 +91,16 @@ button {
 
 .labelsettings__width > input {
     width: 3.3em;
+    text-align: right;
+}
+
+.labelsettings__width > label > i {
+    position: absolute;
+    right: 9999px;
+}
+.labelsettings__width::after {
+    content: attr(data-unit);
+    margin-left: .25em;
 }
 
 
@@ -121,7 +131,6 @@ button {
     padding: 0;
 
     margin-right: 0;
-    margin-left: auto;
     color: #ddd;
     border-bottom: 1px dotted #bbb;
 }
