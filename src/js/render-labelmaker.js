@@ -7,7 +7,8 @@ import { textsizes, zoomlevels } from './options';
 
 
 var _renderAppSettings = function (c) {
-    return  c.same.settings ||
+    // return  c.same.settings ||
+    return  1 && // temporary while c.showColorChart is being used
             m('div', { className: 'appsettings' },
               c.showColorChart?null:
               m('div', { className: 'appsettings__zoom' },
@@ -292,7 +293,7 @@ var labelMaker = {
               _renderAppSettings(c),
 
               !c.showColorChart?null:
-                m('div.colorchart', { key:'foo' }, [1,2,3,4,5,6,7].map(function(i){ return m('div.colorchart__bar.colorchart__bar--'+i,i); }) ),
+                m('div.colorchart', [1,2,3,4,5,6,7].map(function(i){ return m('div.colorchart__bar.colorchart__bar--'+i,i); }) ),
 
               c.showColorChart?null:
                 _renderSavedLabelsMenu(c),
