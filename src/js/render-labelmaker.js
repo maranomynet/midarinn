@@ -5,6 +5,7 @@ import * as action from './actions';
 import { textsizes, zoomlevels } from './options';
 
 
+
 var _renderAppSettings = function (c) {
     return  c.same.settings ||
             m('div', { className: 'appsettings' },
@@ -48,6 +49,9 @@ var _renderAppSettings = function (c) {
             );
   };
 
+
+
+
 var _renderSavedLabelsMenu = function (c) {
     return  m('div', { className: 'savedlabelsmenu' },
               !state.labels.length ? null:
@@ -82,6 +86,10 @@ var _renderSavedLabelsMenu = function (c) {
               )
             );
   };
+
+
+
+
 
 var _renderLabelSettings = function (c) {
     return  c.same.activelabel ||
@@ -134,6 +142,10 @@ var _renderLabelSettings = function (c) {
             );
   };
 
+
+
+
+
 var _renderLabelActions = function (/*c*/) {
     return  m('div', { className: 'labelactions' },
               m('button', { className: 'labelactions__save',
@@ -155,6 +167,8 @@ var _renderLabelActions = function (/*c*/) {
 
 
 
+
+
 var insertTextAtCursor = function ( text ) {
         var sel = window.getSelection();
         if (sel.getRangeAt && sel.rangeCount) {
@@ -164,6 +178,7 @@ var insertTextAtCursor = function ( text ) {
         }
       };
 var labelDefaults = getEmptyLabel();
+
 
 var _renderEditableElm = function (tagName, classSuffix, propName) {
     return  m(tagName, { className: 'activelabel__section__' + classSuffix,
@@ -201,6 +216,10 @@ var _renderEditableElm = function (tagName, classSuffix, propName) {
               }
             );
   };
+
+
+
+
 
 var _renderActiveLabel = function (c) {
     var zoomClass = state.settings.zoom !== 100 ? ' activelabel--zoom--' + state.settings.zoom : '';
@@ -240,6 +259,9 @@ var _renderActiveLabel = function (c) {
   };
 
 
+
+
+
 var labelMaker = {
       controller: function () {
           var c = {};
@@ -268,16 +290,19 @@ var labelMaker = {
           return [
               m('h1', 'Síldarmiðavélin'),
               _renderAppSettings(c),
+
+              !c.showColorChart?null:
+                m('div.colorchart', { key:'foo' }, [1,2,3,4,5,6,7].map(function(i){ return m('div.colorchart__bar.colorchart__bar--'+i,i); }) ),
+
               c.showColorChart?null:
                 _renderSavedLabelsMenu(c),
+
               c.showColorChart?null:
-                _renderLabelSettings(c),
+                _renderLabelSettings(c), //
               c.showColorChart?null:
                 _renderLabelActions(c),
               c.showColorChart?null:
-                _renderActiveLabel(c),
-              !c.showColorChart?null:
-                m('div.colorchart', { key:'foo' }, [1,2,3,4,5,6,7].map(function(i){ return m('div.colorchart__bar.colorchart__bar--'+i,i); }) )
+                _renderActiveLabel(c)
             ];
         },
     };

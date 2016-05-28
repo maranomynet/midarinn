@@ -23,6 +23,11 @@ button {
 }
 
 
+
+// --------------------------------------------------------------------------
+
+
+
 .appsettings {
     float: right;
     margin-top: .8rem;
@@ -36,6 +41,9 @@ button {
     margin-bottom: .5rem;
 }
 
+
+
+// --------------------------------------------------------------------------
 
 
 
@@ -69,6 +77,10 @@ button {
 
 
 
+// --------------------------------------------------------------------------
+
+
+
 .labelsettings {
     clear: both;
     border-top: 1px solid #ccc;
@@ -96,6 +108,10 @@ button {
     content: attr(data-unit);
     margin-left: .25em;
 }
+
+
+
+// --------------------------------------------------------------------------
 
 
 
@@ -136,20 +152,7 @@ button {
 
 
 
-
-@media print {
-    body {
-        background-color: transparent;
-    }
-    h1,
-    .appsettings,
-    .savedlabelsmenu,
-    .labelsettings,
-    .labelactions {
-        display: none;
-    }
-}
-
+// --------------------------------------------------------------------------
 
 
 
@@ -233,6 +236,10 @@ $zoomlevels = (90 80 70 60 50 40 33 25 20 15);
 
 
 
+// --------------------------------------------------------------------------
+
+
+
 .activelabel--style--normal {
     padding: 1cm 1cm 1.25cm 1cm;
     background-color: #dfe0e2;
@@ -258,6 +265,11 @@ $zoomlevels = (90 80 70 60 50 40 33 25 20 15);
 }
 
 
+
+// --------------------------------------------------------------------------
+
+
+
 .activelabel--style--alternate {
 }
 .activelabel--style--alternate .activelabel__section {
@@ -269,6 +281,9 @@ $zoomlevels = (90 80 70 60 50 40 33 25 20 15);
     background-color: #dfe0e2;
 }
 
+
+
+// --------------------------------------------------------------------------
 
 
 
@@ -296,4 +311,23 @@ $color = #dfe0e2;
 .colorchart__bar--5 { background-color: $color; }
 .colorchart__bar--6 { background-color: darken($color, 4%); }
 .colorchart__bar--7 { background-color: darken($color, 8%); }
+
+
+
+// --------------------------------------------------------------------------
+
+
+
+@media print {
+    body {
+        background-color: transparent;
+    }
+    h1,
+    .appsettings,
+    .savedlabelsmenu,
+    .labelsettings,
+    .labelactions {
+        display: none;
+    }
+}
 
