@@ -1,0 +1,94 @@
+// Hide element's text for image or ::before icon replacement
+//
+//   _hideText(soft);
+//      Applies nowrap + hide overflow.
+//      Great for ::before inline-block icons.
+//
+//   _hideText();
+//   _hideText(normal);
+//      `soft` + indents text into the overflow
+//      Great for most background-image applications
+//
+//   _hideText(hard);
+//      `normal` + transparency + collapsed letter-spacing.
+//      Verbose version for weird edge-cases, with
+//      long paragraphs of text and/or cases where
+//      nasty inherited text-styling causes trouble.
+//
+_hideText( $mode=normal ) {
+    overflow: hidden;
+    white-space: nowrap;
+    if ($mode != soft) {
+        text-indent: 150%;
+        text-align: left;
+    }
+    if ($mode == hard) {
+        letter-spacing: -0.4em;
+        text-shadow: none !important;
+        color: transparent !important;
+    }
+}
+
+
+
+// reset <button> styles for easier custom styling
+_buttonReset() {
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    font-size: inherit;
+    line-height: inherit;
+    text-align: inherit;
+    text-shadow: inherit;
+    color: inherit;
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
+}
+
+
+
+
+// screen-reader and rtl-friendly off-screen hiding
+_sr-only( $mode=normal ) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    opacity: 0.00001;
+    pointer-events: none;
+    margin: 0  if $mode!=soft;
+}
+// undo _sr-only() on :focus and :active
+_sr-only--undo( $mode=normal ) {
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    opacity: 1;
+    pointer-events: auto;
+    margin: 0  if $mode!=soft;
+}
+_sr-only-focusable( $mode=normal ) {
+    _sr-only($mode);
+
+    &:active,
+    &:focus {
+        z-index: 99999;
+        _sr-only--undo($mode);
+    }
+}
+
+
+_afterClear() {
+    &::after {
+        content: ' ';
+        clear: both;
+        display: block;
+        height: 0;
+    }
+}

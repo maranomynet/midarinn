@@ -81,32 +81,70 @@ var deleteActiveLabel = function () {
   // return success;
 };
 
+
+
+var _saveLabel = function (label) {
+  state.labels = state.labels.slice();
+  var id = label.id;
+  var idx = id && _getLabelIdx( id );
+  window.console.log( '_saveLabel', idx );
+  if ( idx != null ) {
+    state.labels[idx] = label;
+  }
+  else {
+    label.id = label.id || ('' + Date.now());
+    state.labels.unshift(label);
+    state.labels.sortISL({
+        getProp: function (label) {
+            return label.is_title.toLowerCase();
+          },
+      });
+  }
+  if ( _localStorage ) {
+    _localStorage['sild-midar'] = JSON.stringify(state.labels);
+  }
+};
+
 var saveActiveLabel = function () {
   var activelabel = state.activelabel;
   if ( activelabel._changed ) {
     delete activelabel._changed;
-    state.labels = state.labels.slice();
-    var id = activelabel.id;
-    var idx = id && _getLabelIdx( id );
-    if ( idx != null ) {
-      state.labels[idx] = activelabel;
-    }
-    else {
-      id = '' + Date.now();
-      activelabel.id = id;
-      state.labels.unshift(activelabel);
-      state.labels.sortISL({
-          getProp: function(label){
-              window.console.log( label.is_title.toLowerCase() );
-              return label.is_title.toLowerCase();
-            },
-        });
-    }
-    if ( _localStorage ) {
-      _localStorage['sild-midar'] = JSON.stringify(state.labels);
-    }
+    _saveLabel( activelabel );
   }
 };
+
+
+
+var _addImportedLabels = function ( labels ) {
+  var activelabel = state.activelabel;
+  labels.forEach(function (label) {
+      _saveLabel( label );
+      if ( label.id === activelabel.id  &&  !activelabel._changed ) {
+        state.activelabel = label;
+      }
+    });
+};
+
+
+var readLabelsFromFile = function (file, callback) {
+  var reader = new FileReader();
+  reader.onload = function (e) {
+      var labels;
+      var error;
+      var success;
+      try {
+        var labels = JSON.parse(e.target.result)
+        _addImportedLabels( labels );
+        success = 'Búin að lesa inn gögn';
+      }
+      catch (ex) {
+        error = 'Tókst ekki að lesainn gögnin';
+      }
+      callback && callback( success, error );
+    };
+  reader.readAsText( file );
+};
+
 
 
 export {
@@ -115,5 +153,6 @@ export {
   loadLabel,
   makeNewLabel,
   deleteActiveLabel,
+  readLabelsFromFile,
   saveActiveLabel
 };

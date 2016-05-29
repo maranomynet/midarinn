@@ -92,6 +92,50 @@ var _renderSavedLabelsMenu = function (c) {
 
 
 
+var _renderImportExport = function (c) {
+    return  m('div', { className: 'importexport' },
+              !state.labels.length ? null:
+              m('button', { className: 'importexport__export',
+                  onclick: c.exportLabels,
+                  title: 'Hlaða niður öryggisafriti af öllum miðum.',
+                },
+                'Sækja skrá'
+              ),
+
+              m('span', { className: 'importexport__import',
+                  key:'importbtn',
+                },
+                m('label', { htmlFor: 'importexport__import',
+                    title: 'Hlaða upp áður vistuðu öryggisafriti'
+                  },
+                  'Hlaða upp'
+                ),
+                ' ',
+                m('input', { type: 'file',
+                  id: 'importexport__import',
+                  accept: '.json',
+                  onchange: function () {
+                      var input = this;
+                      var file = input.files[0];
+                      if ( file ) {
+                        action.readLabelsFromFile( file, function (success, error) {
+                            if ( success ) {
+                              m.redraw();
+                            }
+                            input.value = '';
+                          });
+                      }
+                      m.redraw.strategy('none');
+                    },
+                })
+              )
+
+            );
+  };
+
+
+
+
 var _renderLabelSettings = function (c) {
     return  c.same.activelabel ||
             m('div', { className: 'labelsettings' },
@@ -102,7 +146,7 @@ var _renderLabelSettings = function (c) {
                   min: 15,  max: 150,  step: 0.1,
                   id: 'labelsettings__width',
                   value: state.activelabel.width,
-                  onchange: function () { action.updateActiveLabel('width', this.value); },
+                  onchange: function () { action.updateActiveLabel('width', parseFloat(this.value)); },
                 })
               ),
               m('div', { className: 'labelsettings__vertical' },
@@ -282,6 +326,14 @@ var labelMaker = {
               return c.same;
             };
 
+          c.exportLabels = function () {
+              var dataStr = JSON.stringify( state.labels, null, 2 );
+              var link = document.createElement('a')
+              link.href = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+              link.download = 'midavelin-backup.json';
+              link.click();
+            };
+
           return c;
         },
 
@@ -293,15 +345,17 @@ var labelMaker = {
               _renderAppSettings(c),
 
               !c.showColorChart?null:
-                m('div.colorchart', [1,2,3,4,5,6,7].map(function(i){ return m('div.colorchart__bar.colorchart__bar--'+i,i); }) ),
+                m('div.colorchart', { key:'colorchart' }, [1,2,3,4,5,6,7].map(function(i){ return m('div.colorchart__bar.colorchart__bar--'+i,i); }) ),
 
+              c.showColorChart?null:
+                _renderImportExport(c),
               c.showColorChart?null:
                 _renderSavedLabelsMenu(c),
 
               c.showColorChart?null:
-                _renderLabelSettings(c), //
+                _renderLabelSettings(c),
               c.showColorChart?null:
-                _renderLabelActions(c),
+                _renderLabelActions(c), // Save/Delete, etc.
               c.showColorChart?null:
                 _renderActiveLabel(c)
             ];

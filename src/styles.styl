@@ -1,3 +1,5 @@
+@require 'css/utils';
+
 body {
     background-color: #666;
     color: #fff;
@@ -9,7 +11,8 @@ body {
 
 h1 {
     font-size: 2rem;
-    margin: 0 0 .5rem 0;
+    line-height: 2.67rem
+    margin: 0 0 1rem 0;
     float: left;
 }
 
@@ -22,6 +25,23 @@ button {
     cursor: pointer;
 }
 
+[aria-hidden="true"] {
+    display: none !important;
+}
+
+
+
+_linkybutton() {
+    _buttonReset();
+    color: #ddd;
+    border-bottom: 1px dotted #bbb;
+
+    &:hover,
+    &:focus {
+        color: #fff;
+        border-bottom-style: solid;
+    }
+}
 
 
 // --------------------------------------------------------------------------
@@ -47,32 +67,47 @@ button {
 
 
 
-.savedlabelsmenu {
+.importexport {
     clear: both;
+    float: right;
     margin-bottom: 1rem;
+    position: relative;
 }
-.savedlabelsmenu__labellist,
-.savedlabelsmenu__newlabel {
+.importexport__export {
+    _linkybutton();
+    margin-left: 1.5em;
+}
+.importexport__import {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 1.5em;
+}
+.importexport__import > label {
+    _linkybutton();
+    vertical-align: top;
+}
+.importexport__import > input {
+    _sr-only();
+}
+
+
+
+// --------------------------------------------------------------------------
+
+
+
+.savedlabelsmenu {
+    margin-bottom: 1rem;
+    clear: left;
+}
+.savedlabelsmenu__labellist {
     display: inline-block;
     margin-right: 1.5rem;
     margin-bottom: .5rem;
 }
-
 .savedlabelsmenu__newlabel {
-    border: 0;
-    background: 0;
-    line-height: inherit;
-    color: inherit;
-    padding: 0;
-
-    margin-right: 0;
-    color: #ddd;
-    border-bottom: 1px dotted #bbb;
-}
-.savedlabelsmenu__newlabel:hover,
-.savedlabelsmenu__newlabel:focus {
-    color: #fff;
-    border-bottom-style: solid;
+    _linkybutton();
+    margin-bottom: .5rem;
 }
 
 
@@ -124,30 +159,13 @@ button {
     align-items: center;
 }
 
-.labelactions__save,
-.labelactions__delete {
-    display: inline-block;
+.labelactions__save {
     margin-right: 1.5rem;
     margin-bottom: .5rem;
 }
-.labelactions__save {
-    font-size: 1rem;
-}
 .labelactions__delete {
-    border: 0;
-    background: 0;
-    line-height: inherit;
-    color: inherit;
-    padding: 0;
-
-    margin-right: 0;
-    color: #ddd;
-    border-bottom: 1px dotted #bbb;
-}
-.labelactions__delete:hover,
-.labelactions__delete:focus {
-    color: #fff;
-    border-bottom-style: solid;
+    _linkybutton();
+    margin-bottom: .5rem;
 }
 
 
