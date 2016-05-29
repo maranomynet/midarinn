@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/maranomynet/midarinn#readme",
   "devDependencies": {
+    "array_sortISL": "gist:9972930",
     "gulp": "^3.9.1",
     "gulp-cssnano": "^2.1.2",
     "gulp-plumber": "^1.1.0",

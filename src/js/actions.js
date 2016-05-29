@@ -1,4 +1,5 @@
 import { state, getEmptyLabel } from './state';
+import 'array_sortISL';
 
 var _localStorage = window.localStorage;
 
@@ -94,6 +95,12 @@ var saveActiveLabel = function () {
       id = '' + Date.now();
       activelabel.id = id;
       state.labels.unshift(activelabel);
+      state.labels.sortISL({
+          getProp: function(label){
+              window.console.log( label.is_title.toLowerCase() );
+              return label.is_title.toLowerCase();
+            },
+        });
     }
     if ( _localStorage ) {
       _localStorage['sild-midar'] = JSON.stringify(state.labels);
