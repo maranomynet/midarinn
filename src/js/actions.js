@@ -26,12 +26,12 @@ var _getLabelIdx = function (id) {
         var labels = state.labels;
         idx = labels.length;
         while ( idx-- ) {
-          if ( id === labels[idx].id ) {
+          if ( labels[idx].id === id ) {
             break;
           }
         }
       }
-      return idx >= 0 ? idx : null;
+      return idx < 0 ? null : idx;
     };
 var _getLabel = function (id) {
       return state.labels[ _getLabelIdx( id ) ];
@@ -63,7 +63,7 @@ var loadLabel = function (id) {
 };
 
 var makeNewLabel = function () {
-  return loadLabel();
+  return loadLabel(null);
 };
 
 var deleteActiveLabel = function () {
