@@ -23,11 +23,17 @@ var getInitialState = function () {
   var localStorage = window.localStorage;
   if ( localStorage ) {
     try {
-      labels = JSON.parse( localStorage.getItem('sild-midar') || null ) || labels;
+      var savedLabels = JSON.parse( localStorage.getItem('sild-midar') || null );
+      if ( savedLabels ) {
+        labels =  savedLabels;
+      }
     }
     catch (ex) {}
     try {
-      activelabel = JSON.parse( localStorage.getItem('sild-midi') || null ) || activelabel;
+      var savedActiveLabel = JSON.parse( localStorage.getItem('sild-midi') || null )
+      if ( savedActiveLabel ) {
+        activelabel = savedActiveLabel;
+      }
     }
     catch (ex) {}
   }
