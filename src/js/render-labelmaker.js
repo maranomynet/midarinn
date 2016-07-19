@@ -145,8 +145,15 @@ var _renderLabelSettings = function (c) {
                 m('input', { type:'number',
                   min: 15,  max: 150,  step: 0.1,
                   id: 'labelsettings__width',
-                  value: state.activelabel.width,
-                  onchange: function () { action.updateActiveLabel('width', parseFloat(this.value)); },
+                  value: ''+state.activelabel.width,
+                  oninput: function () {
+                    var val = this.value;
+                    var cleanValue = val.replace(/[^\d\.]/g,'') || ''+state.activelabel.width;
+                    if ( cleanValue !== val ) {
+                      this.value = cleanValue;
+                    }
+                    action.updateActiveLabel( 'width', parseFloat(cleanValue) );
+                  },
                 })
               ),
               m('div', { className: 'labelsettings__vertical' },
